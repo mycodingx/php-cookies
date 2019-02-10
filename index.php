@@ -1,9 +1,10 @@
 <?php
-require_once('page.php'); 
+require_once('page.php');
+$token = generate_token(); 
 $data = $_COOKIE;
 $message = "";
 $clear = "";
-if(!empty($data))
+if(!empty($data['token']))
 {   
     $message .="<p>Hi ".$data['firstname']." ".$data['lastname']."</p>";
     $message .="<p>Thanks you for registering in ".$data['course']."</p>";
@@ -73,11 +74,11 @@ else{
 <form class="form" method="POST" action="page.php">
 <div class="form-group">
   <label>First name:</label>
-  <input type="text" name="firstname" placeholder="First Name">
+  <input type="text" name="firstname" placeholder="First Name" required>
 </div>
 <div class="form-group">
  <label>Last name:</label>
-  <input type="text" name="lastname" placeholder="Last Name">
+  <input type="text" name="lastname" placeholder="Last Name" required>
  </div>
  <div class="form-group">
  <label> Course Selection:</label>
@@ -105,8 +106,9 @@ else{
  </div>
  <div class="form-group">
  <label>Expiry Date (MMYY):</label>
-  <input type="text" name="date" placeholder="MMYY">
+  <input type="text" name="date" placeholder="MMYY" required>
  </div>
+ <input type="hidden" value="<?=$token?>" name="token">
   <input type="submit" value="submit" name="submit">
 </form> 
 </center>
